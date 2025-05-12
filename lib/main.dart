@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:multisuministros/pages/login_page.dart';
+import 'package:multisuministros/routes/appRoutes.dart';
 
 void main() => runApp(const MyApp());
 
@@ -14,10 +15,9 @@ class MyApp extends StatelessWidget {
       title: 'Multisuministros',
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.redAccent)),
-      initialRoute: 'loginPage',
-      routes: {
-      },
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red)),
+      initialRoute: AppRoutes.login,
+      routes: AppRoutes.appRoutes,
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Material App Bar'),

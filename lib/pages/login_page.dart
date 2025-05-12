@@ -8,8 +8,9 @@ const LoginPage({ super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: const Color.s,
+      backgroundColor: theme.colorScheme.primary,
       body: Center(
         child: Text('Hola login'),
      ),

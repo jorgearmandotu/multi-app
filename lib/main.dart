@@ -16,7 +16,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.redAccent)),
       initialRoute: 'loginPage',
-      routes: {},
+      routes: {
+      },
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Material App Bar'),

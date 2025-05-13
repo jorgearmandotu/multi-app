@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:multisuministros/pages/login_page.dart';
-import 'package:multisuministros/routes/appRoutes.dart';
+import 'package:multisuministros/routes/app_routes.dart';
 
 void main() => runApp(const MyApp());
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:multisuministros/bloc/auth_bloc.dart';
-import 'package:multisuministros/pages/login_page.dart';
 import 'package:multisuministros/routes/app_routes.dart';
 
 void main() => runApp(const MyApp());

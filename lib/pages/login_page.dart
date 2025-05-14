@@ -18,8 +18,8 @@ const LoginPage({ super.key});
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const FlutterLogo(size: 100,),
-                const SizedBox(height: 32.0,),
+                Image.asset('assets/logo/ic_launcher.png', height: 100,),
+                const SizedBox(height: 16.0,),
                 const TextField(
                   keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(labelText: 'Correo Electronico', border: OutlineInputBorder()),

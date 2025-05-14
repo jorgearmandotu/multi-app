@@ -8,3 +8,4 @@ class LoginUser extends AuthEvent { //activate
   LoginUser(this.user);
 }
 
+//class change user, add dataa user, logout

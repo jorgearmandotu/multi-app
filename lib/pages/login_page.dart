@@ -1,6 +1,10 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:multisuministros/bloc/auth_bloc.dart';
+import 'package:multisuministros/models/user.dart';
+import 'package:multisuministros/routes/app_routes.dart';
 
 
 class LoginPage extends StatelessWidget {
@@ -8,9 +12,14 @@ const LoginPage({ super.key});
 
   @override
   Widget build(BuildContext context) {
+
     final theme = Theme.of(context);
+    final authBloc = BlocProvider.of<AuthBloc>(context, listen: false);
     return Scaffold(
-      backgroundColor: theme.colorScheme.onSecondary,
+      appBar: AppBar(
+        title: Text('Inicia sesion'),
+      ),
+      //backgroundColor: theme.colorScheme.onSecondary,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
@@ -31,7 +40,11 @@ const LoginPage({ super.key});
                 ),
                 SizedBox(height: 16.0),
                 ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    final newUser = User(name: 'usuario logueado pedro', password: '1233');
+                    authBloc.add(LoginUser(newUser));
+                    Navigator.pushNamed(context, AppRoutes.home);
+                  },
                   child: Text('Iniciar Sesion'))
               ],
             )
@@ -40,4 +53,24 @@ const LoginPage({ super.key});
      ),
    );
   }
+}
+
+
+class _Form extends StatelessWidget {
+
+
+  final emailCtr = TextEditingController();
+  final passwordCtr = TextEditingController();
+  
+  _Form();
+
+  @override
+  Widget build(BuildContext context) {
+    
+    throw UnimplementedError();
+  }
+  
+
+  
+
 }

@@ -1,5 +1,6 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:multisuministros/bloc/auth_bloc.dart';
 import 'package:multisuministros/pages/login_page.dart';
 import 'package:multisuministros/routes/app_routes.dart';
 
@@ -10,21 +11,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Multisuministros',
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red)),
-      initialRoute: AppRoutes.login,
-      routes: AppRoutes.appRoutes,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Material App Bar'),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: ( _ ) => AuthBloc())
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Multisuministros',
+        theme: ThemeData(
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
         ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
+        initialRoute: AppRoutes.login,
+        routes: AppRoutes.appRoutes,
+        // home: Scaffold(
+        //   appBar: AppBar(title: const Text('Material App Bar')),
+        //   body: const Center(child: Text('Hello World')),
+        // ),
       ),
     );
   }

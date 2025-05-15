@@ -1,5 +1,8 @@
 
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
+import 'package:multisuministros/utils/env.dart';
 
 class AuthService {
   // This class will handle authentication-related tasks
@@ -20,11 +23,38 @@ class AuthService {
       'password': password,
     };
 
-    final resp = await http.post(Uri.parse('${ Environment.apiUrl }/login'),
+    final resp = await http.post(Uri.parse('${ Env.baseurl } /login'),
     body: jsonEncode(data),
     headers: {
       'Content-Type': 'application/json'
     });
+
+    print(resp.statusCode);
+    if(resp.statusCode != 200) {
+      authProcess = false;
+      print('no se pudo iniciar sesion');
+      return false; // Return false if login fails
+    }
+    if (resp.statusCode == 200) {
+      print('login exitoso');
+      return true;
+      // final Map<String, dynamic> responseData = jsonDecode(resp.body);
+      // if (responseData['status'] == 'success') {
+      //   // Handle successful login
+      //   print('Login successful');
+      //   authProcess = false;
+      //   return true; // Return true if login is successful
+      // } else {
+      //   // Handle failed login
+      //   print('Login failed: ${responseData['message']}');
+      //   authProcess = false;
+      //   return false; // Return false if login fails
+      // }
+    }
+    authProcess = false;
+    return false;
+
+
 
     return true; // Return true if login is successful
   }

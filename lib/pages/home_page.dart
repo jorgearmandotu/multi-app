@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
       ),
       body: BlocBuilder<AuthBloc, AuthState>(
         builder: (context, state) {
-          return Center(child: Text(state.user!.name));
+          return Center(child: Text('user logueado: '));
         },
       ),
     );

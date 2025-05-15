@@ -4,7 +4,30 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
+        {
+            "type": "dart",
+            "request": "launch",
+            "name": "Development",
+            "args": [
+                "--dart-define-from-file=.env/dev.json"
+            ]
+        },     
+        {
+            "type": "dart",
+            "request": "launch",
+            "name": "Staging",
+            "args": [
+                "--dart-define-from-file=.env/stg.json"
+            ]
+        },     
+        {
+            "type": "dart",
+            "request": "launch",
+            "name": "Production",
+            "args": [
+                "--dart-define-from-file=.env/prod.json"
+            ]
+        },     
         {
             "type": "chrome",
             "request": "launch",

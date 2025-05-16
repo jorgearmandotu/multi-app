@@ -77,7 +77,7 @@ class _Form extends StatelessWidget {
           ElevatedButton(
             onPressed: (){
               if (_formKey.currentState!.validate()) {
-                final newUser = User(email: emailCtr.text, password: passwordCtr.text);
+                final newUser = User(email: emailCtr.text.trim(), password: passwordCtr.text.trim());
                 authBloc.add(LoginUser(newUser));
                 Navigator.pushNamed(context, AppRoutes.home);
               }

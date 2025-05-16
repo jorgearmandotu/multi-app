@@ -23,7 +23,8 @@ class AuthService {
       'password': password,
     };
 
-    final resp = await http.post(Uri.parse('${ Env.baseurl } /login'),
+    print(data);
+    final resp = await http.post(Uri.parse('${ Env.baseurl }/login'),
     body: jsonEncode(data),
     headers: {
       'Content-Type': 'application/json'

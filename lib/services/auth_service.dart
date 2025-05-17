@@ -23,21 +23,20 @@ class AuthService {
       'password': password,
     };
 
-    print(data);
     final resp = await http.post(Uri.parse('${ Env.baseurl }/login'),
     body: jsonEncode(data),
     headers: {
       'Content-Type': 'application/json'
     });
 
-    print(resp.statusCode);
+
     if(resp.statusCode != 200) {
       authProcess = false;
-      print('no se pudo iniciar sesion');
+
       return false; // Return false if login fails
     }
     if (resp.statusCode == 200) {
-      print('login exitoso');
+      print('login exitoso ${resp.body}');
       return true;
       // final Map<String, dynamic> responseData = jsonDecode(resp.body);
       // if (responseData['status'] == 'success') {

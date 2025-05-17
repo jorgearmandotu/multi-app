@@ -72,7 +72,7 @@ class _Form extends StatelessWidget {
             },
           ),
           const SizedBox(height: 16.0,),
-          PasswordTextField(),
+          PasswordTextField(controllerText: passwordCtr),
           const SizedBox(height: 16.0),
           ElevatedButton(
             onPressed: (){

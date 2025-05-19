@@ -43,7 +43,8 @@ class _Form extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final AuthBloc authBloc = BlocProvider.of<AuthBloc>(context, listen: false);
+    final AuthBloc authBloc = BlocProvider.of<AuthBloc>(context, listen: true);
+    final state = authBloc.state;
 
     return Form(
       key: _formKey,
@@ -74,15 +75,24 @@ class _Form extends StatelessWidget {
           const SizedBox(height: 16.0,),
           PasswordTextField(controllerText: passwordCtr),
           const SizedBox(height: 16.0),
-          ElevatedButton(
-            onPressed: (){
-              if (_formKey.currentState!.validate()) {
-                final newUser = User(email: emailCtr.text.trim(), password: passwordCtr.text.trim());
-                authBloc.add(LoginUser(newUser));
-                Navigator.pushNamed(context, AppRoutes.home);
-              }
-            },
-            child: Text('Iniciar Sesion'))
+          if( state is AuthLoading)
+            const CircularProgressIndicator()
+          else if(state is AuthError)
+            Text(state.error, style: const TextStyle(color: Colors.red),)
+          else
+            ElevatedButton(
+              onPressed: state is AuthLoading ? null 
+              : (){
+                if (_formKey.currentState!.validate()) {
+                  final newUser = User(email: emailCtr.text.trim(), password: passwordCtr.text.trim());
+                  authBloc.add(LoginButtonPressed(newUser.email, newUser.password));
+
+                  //Navigator.pushNamed(context, AppRoutes.home);
+                }
+              },
+            child: state is AuthLoading
+            ? const CircularProgressIndicator()
+            : const Text('Iniciar Sesion'))
         ],
       )
     );

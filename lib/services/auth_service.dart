@@ -31,25 +31,26 @@ class AuthService {
 
 
     if(resp.statusCode != 200) {
+      print('login error ${resp.body}');
       authProcess = false;
 
       return false; // Return false if login fails
     }
     if (resp.statusCode == 200) {
-      print('login exitoso ${resp.body}');
-      return true;
-      // final Map<String, dynamic> responseData = jsonDecode(resp.body);
-      // if (responseData['status'] == 'success') {
-      //   // Handle successful login
-      //   print('Login successful');
-      //   authProcess = false;
-      //   return true; // Return true if login is successful
-      // } else {
-      //   // Handle failed login
-      //   print('Login failed: ${responseData['message']}');
-      //   authProcess = false;
-      //   return false; // Return false if login fails
-      // }
+      print('login exitoso ${resp.body}');//flutter: login exitoso {"status":"success","data":{"name":"admin","email":"admin@gmail.com","token":"8|jn5kevsYJWS3cgFZ6pO7i02mwD0UMcXNia5Kbpk60a9c9393"}}
+
+      final Map<String, dynamic> responseData = jsonDecode(resp.body);
+      if (responseData['status'] == 'success') {
+        // Handle successful login
+        print('Login successful');
+        authProcess = false;
+        return true; // Return true if login is successful
+      } else {
+        // Handle failed login
+        print('Login failed: ${responseData['message']}');
+        authProcess = false;
+        return false; // Return false if login fails
+      }
     }
     authProcess = false;
     return false;

@@ -10,8 +10,24 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthInitialState()) {
 
     final authService = AuthService();
-    on
-    <LoginUser>((event, emit) {
+
+    Future<void> _onLoginButtonPressed(
+      LoginButtonPressed event, 
+      Emitter<AuthState> emit) async {
+        emit(AuthLoading());
+        try {
+          final user = await authService.login(event.email, event.password);
+          if (user != null) {
+            emit(AuthSuccess());
+          } else {
+            emit(AuthError('Error de autenticacion'));
+          }
+        } catch (e) {
+          emit(AuthError(e.toString()));
+       }
+    }
+    
+    on<LoginUser>((event, emit) {
       authService.login(event.user.email, event.user.password).then((value) {
         if (value) {
           print(value);
@@ -22,5 +38,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       });
       //emit(AuthSetState(event.user));
     });
+
+    on<LoginButtonPressed>(_onLoginButtonPressed);
+
+    
+
+
   }
 }

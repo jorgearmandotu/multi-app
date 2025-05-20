@@ -20,7 +20,8 @@ class AuthLoading extends AuthState {
 }
 
 class AuthSuccess extends AuthState {
-  const AuthSuccess(): super (authUser: true);//usuario token
+  User? user;
+  AuthSuccess(this.user): super (authUser: true);//usuario token
 }
 
 class AuthError extends AuthState {
@@ -38,6 +39,6 @@ class AuthLogoutErrorState extends AuthState {
 
 
 final class AuthSetState extends AuthState {
-   final User newUser;
-   const AuthSetState(this.newUser) :super(authUser: true, user: newUser);
+   final User user;
+   const AuthSetState(this.user) :super(authUser: true, user: user);
 }

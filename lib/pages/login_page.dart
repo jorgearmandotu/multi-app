@@ -78,15 +78,22 @@ class _Form extends StatelessWidget {
           if( state is AuthLoading)
             const CircularProgressIndicator()
           else if(state is AuthError)
-            Text(state.error, style: const TextStyle(color: Colors.red),)
-          else
+            Text(state.error, style: const TextStyle(color: Colors.red),),
+          const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: state is AuthLoading ? null 
               : (){
                 if (_formKey.currentState!.validate()) {
                   final newUser = User(email: emailCtr.text.trim(), password: passwordCtr.text.trim());
                   authBloc.add(LoginButtonPressed(newUser.email, newUser.password));
-
+                  //authBloc.add(LoginUser(newUser));
+                  if(state is AuthSuccess) {
+                    //Navigator.pushNamed(context, AppRoutes.home);
+                    print('Login successful de if');
+                    Navigator.pushNamed(context, AppRoutes.home);
+                  } else {
+                    print('Login failed');
+                  }
                   //Navigator.pushNamed(context, AppRoutes.home);
                 }
               },

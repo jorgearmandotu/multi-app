@@ -18,7 +18,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         try {
           final user = await authService.login(event.email, event.password);
           if (user != null) {
-            emit(AuthSuccess());
+            emit(AuthSuccess(user));
           } else {
             emit(AuthError('Error de autenticacion'));
           }
@@ -29,7 +29,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     
     on<LoginUser>((event, emit) {
       authService.login(event.user.email, event.user.password).then((value) {
-        if (value) {
+        if (value != null ) {
           print(value);
           emit(AuthSetState(event.user));
         } else {

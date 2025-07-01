@@ -17,7 +17,6 @@ class AuthService {
   // Example method for user login
   Future<User?> login(String email, String? password) async {
     // Implement your login logic here
-    //authProcess = true;
 
     User? user = null;//User(email: 'email', password: 'password');
 
@@ -34,33 +33,23 @@ class AuthService {
 
 
     if(resp.statusCode != 200) {
-      print('login error ${resp.body}');
-      //authProcess = false;
-      return user; // Return false if login fails
+      return null; // Return false if login fails
     }
     if (resp.statusCode == 200) {
       //print('login exitoso ${resp.body}');//flutter: login exitoso {"status":"success","data":{"name":"admin","email":"admin@gmail.com","token":"8|jn5kevsYJWS3cgFZ6pO7i02mwD0UMcXNia5Kbpk60a9c9393"}}
 
       final Map<String, dynamic> responseData = jsonDecode(resp.body);
       if (responseData['status'] == 'success') {
-        // Handle successful login
-        print('Login successful authservice');
-        //authProcess = false;
         User userLogin = User.fromJson(responseData['data']);
-        print(responseData['data']);
-        print(userLogin.toString());
 
         return userLogin; // Return true if login is successful
       } else {
-        // Handle failed login
-        print('Login failed: ${responseData['message']}');
-        //authProcess = false;
-        
-        return user; // Return false if login fails
+        // Handle failed login    
+        return null; // Return false if login fails
       }
     }
     //authProcess = false;
-    return user;
+    return null;
 // Return true if login is successful
   }
 

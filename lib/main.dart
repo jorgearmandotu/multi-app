@@ -23,10 +23,6 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: AppRoutes.login,
         routes: AppRoutes.appRoutes,
-        // home: Scaffold(
-        //   appBar: AppBar(title: const Text('Material App Bar')),
-        //   body: const Center(child: Text('Hello World')),
-        // ),
       ),
     );
   }

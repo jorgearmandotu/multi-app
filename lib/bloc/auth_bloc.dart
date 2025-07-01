@@ -27,22 +27,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
        }
     }
     
-    on<LoginUser>((event, emit) {
-      authService.login(event.user.email, event.user.password).then((value) {
-        if (value != null ) {
-          print(value);
-          emit(AuthSetState(event.user));
-        } else {
-          emit(AuthInitialState());
-        }
-      });
-      //emit(AuthSetState(event.user));
-    });
+    // on<LoginUser>((event, emit) {
+    //   authService.login(event.user.email, event.user.password).then((value) {
+    //     if (value != null ) {
+    //       emit(AuthSetState(event.user));
+    //     } else {
+    //       emit(AuthInitialState());
+    //     }
+    //   });
+    //   //emit(AuthSetState(event.user));
+    // });
 
-    on<LoginButtonPressed>(_onLoginButtonPressed);
-
-    
-
-
+    on<LoginButtonPressed>(_onLoginButtonPressed);  
   }
 }
+

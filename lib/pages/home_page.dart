@@ -9,9 +9,11 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('Principal'),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.logout_outlined)),
+          IconButton(onPressed: () {
+            //context.read<AuthBloc>().add(AuthLogoutState());
+          }, icon: const Icon(Icons.logout_outlined)),
         ],
       ),
       body: BlocBuilder<AuthBloc, AuthState>(

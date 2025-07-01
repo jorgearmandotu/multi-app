@@ -14,18 +14,25 @@ const LoginPage({ super.key});
   @override
   Widget build(BuildContext context) {
 
-    //final theme = Theme.of(context);
-    final authBloc = BlocProvider.of<AuthBloc>(context, listen: false);
+    //final authBloc = BlocProvider.of<AuthBloc>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text('Inicia sesion'),
       ),
-      //backgroundColor: theme.colorScheme.onSecondary,
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
-          child: _Form(),
-        ),
+        child: BlocListener<AuthBloc, AuthState>(
+          listener: (context, state){
+            if (state is AuthSuccess) {
+              Navigator.pushReplacementNamed(context, AppRoutes.home);
+            }else if(state is AuthError) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(state.error))
+              );
+            }
+          }, 
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
+            child: _Form()),),
      ),
    );
   }
@@ -38,7 +45,7 @@ class _Form extends StatelessWidget {
   final emailCtr = TextEditingController();
   final passwordCtr = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  _Form({super.key});
+  _Form();
 
   @override
   Widget build(BuildContext context) {
@@ -75,9 +82,7 @@ class _Form extends StatelessWidget {
           const SizedBox(height: 16.0,),
           PasswordTextField(controllerText: passwordCtr),
           const SizedBox(height: 16.0),
-          if( state is AuthLoading)
-            const CircularProgressIndicator()
-          else if(state is AuthError)
+          if(state is AuthError)
             Text(state.error, style: const TextStyle(color: Colors.red),),
           const SizedBox(height: 16.0),
             ElevatedButton(
@@ -86,15 +91,6 @@ class _Form extends StatelessWidget {
                 if (_formKey.currentState!.validate()) {
                   final newUser = User(email: emailCtr.text.trim(), password: passwordCtr.text.trim());
                   authBloc.add(LoginButtonPressed(newUser.email, newUser.password));
-                  //authBloc.add(LoginUser(newUser));
-                  if(state is AuthSuccess) {
-                    //Navigator.pushNamed(context, AppRoutes.home);
-                    print('Login successful de if');
-                    Navigator.pushNamed(context, AppRoutes.home);
-                  } else {
-                    print('Login failed');
-                  }
-                  //Navigator.pushNamed(context, AppRoutes.home);
                 }
               },
             child: state is AuthLoading
@@ -104,7 +100,6 @@ class _Form extends StatelessWidget {
       )
     );
     
-    throw UnimplementedError();
   }
   
 

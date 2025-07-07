@@ -15,8 +15,8 @@ class LoginUser extends AuthEvent { //activate
 }
 
 class LogoutButtonPressed extends AuthEvent { //deactivate
-  final User user;
-  LogoutButtonPressed(this.user);
+  //final User user;
+  LogoutButtonPressed();
 }
 
 //class change user, add dataa user, logout

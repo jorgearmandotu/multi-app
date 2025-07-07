@@ -26,6 +26,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(AuthError(e.toString()));
        }
     }
+
+    Future<void> _onLogoutButtonPressed(
+      LogoutButtonPressed event, 
+      Emitter<AuthState> emit) async {
+      emit(AuthLogoutState());
+    }
     
     // on<LoginUser>((event, emit) {
     //   authService.login(event.user.email, event.user.password).then((value) {
@@ -39,6 +45,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     // });
 
     on<LoginButtonPressed>(_onLoginButtonPressed);  
+    on<LogoutButtonPressed>(_onLogoutButtonPressed);
   }
 }
 

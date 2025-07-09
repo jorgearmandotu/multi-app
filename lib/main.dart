@@ -19,7 +19,8 @@ class MyApp extends StatelessWidget {
         title: 'Multisuministros',
         theme: ThemeData(
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.red
+          ),
         ),
         initialRoute: AppRoutes.login,
         routes: AppRoutes.appRoutes,

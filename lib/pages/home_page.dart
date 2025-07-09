@@ -11,7 +11,8 @@ class HomePage extends StatelessWidget {
     final AuthBloc authBloc = BlocProvider.of<AuthBloc>(context, listen: true);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Principal'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text('Mi Vps'),
         actions: [
           IconButton(onPressed: () {
             authBloc.add(LogoutButtonPressed());
@@ -31,9 +32,15 @@ class HomePage extends StatelessWidget {
               );
             }
           }, 
-          child: SingleChildScrollView(
+          child: Container(
             padding: const EdgeInsets.all(16.0),
-            child: Text('Logueado')),),
+            child: ListView.builder(itemBuilder:(context, index) {
+              return ListTile(
+                title: Text('List Item $index'),
+              );
+            },)
+            ),
+          ),
       ),
     );
   }

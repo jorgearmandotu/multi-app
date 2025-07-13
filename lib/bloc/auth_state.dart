@@ -42,3 +42,4 @@ final class AuthSetState extends AuthState {
    final User user;
    const AuthSetState(this.user) :super(authUser: true, user: user);
 }
+

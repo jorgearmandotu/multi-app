@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:multisuministros/bloc/auth_bloc.dart';
+import 'package:multisuministros/bloc/navigation/navigation_bloc.dart';
 import 'package:multisuministros/routes/app_routes.dart';
 
 void main() => runApp(const MyApp());
@@ -12,7 +13,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: ( _ ) => AuthBloc())
+        BlocProvider(create: ( _ ) => AuthBloc()),
+        BlocProvider(create: ( _ ) => NavigationBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

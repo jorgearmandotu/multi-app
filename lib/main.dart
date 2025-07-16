@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: ( _ ) => AuthBloc()),
-        BlocProvider(create: ( _ ) => NavigationBloc()),
+        //BlocProvider(create: ( _ ) => NavigationBloc(tabIndex: 0)),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
             onError: Colors.white,
           ),
         ),
-        initialRoute: AppRoutes.login,
+        initialRoute: AppRoutes.home,
         routes: AppRoutes.appRoutes,
       ),
     );
